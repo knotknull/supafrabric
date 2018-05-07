@@ -7,4 +7,110 @@ Build Your First Network:
 http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html
 
 
+blockchain: immutable transaction ledger within a distributed network of peer nodes.
+            Nodes maintain copy of ledger by applying transactions that have been
+            validated by consensus protocol.  Transactions are grouped into blocks that
+            include a hash that bind each block to preceding block.
 
+Enterprise usage has requirements that don't exist in public blockchain:
+  -  Participants must be indentified / indentifiable (KYC/AML)
+  -  Networks need to be permissioned
+  -  High transaction throughput performance
+  -  Low latency of transaction confirmation
+  -  Privacy and confidentiality of transaction and data pertaining
+     to business transactions
+
+
+Hyperledger Fabric: Open source enterprise-grade permissioned distributed
+                    ledger technology platform.
+
+                    - Established under Linux Foundation
+                    - Architecture is modular / configurable
+                    - supports smart contracts authored in programming languages
+                      (Java, Go, Node.js), No DSL needed.
+                    - Fabric is permissioned, participants known to each other
+                    - Pluggable concensus protocols
+                        - consensus protocols do not require native cryptocurrency
+                    - Allows for privacy and confidentiality of transactions
+                    - Smart contracts known as chaincode
+
+Modularity : Designed to have a modular architecture:
+  -  pluggable ordering service: consensus on order of transactions
+      and broadcasts to peers
+  -  pluggable membership service provider: associates entities in the network
+      with cryptographic identities.
+  -  optional peer-to-peer gossip services disseminates blocks output by
+      ordering service to other peers
+  -  smart contracts (chaincode) run in a container environment (Docker) for
+      isolation.  Can be written in standard programming languages, do NOT have
+      direct access to ledger state.
+  -  ledger can be configured to support a variety of DBMS
+  -  pluggable endorsement / validation policy enforcement can be independently
+      configured per application.
+
+
+Permissioned blockchains: operate among set of known, identified, vetted participants.
+   - can user more traditional crash fault tolerat or byzantine fault tolerant consensus
+      protocols that DO NOT REQUIRE COSTLY MINING.
+   - because participants know each other, less likelihood of submitting malicious
+      smart contracts.
+
+Smart Contracts : aka chaincode, function as a trusted distributed application.`jbbk
+   - many smart contract run concurrently in the network
+   - may be deployed dynamically (in many cases by anyone)
+   - application code should be treated as untrusted and possibly malicious.
+
+Fabric transaction architecture: execute-order-validate.
+   - execute a transaction and check its correctness, thereby endorsing it
+          - each transaction needs to be executed / endorsed by subset of peer nodes
+          - allows for parallel execution /  increasing overall performance
+          - eliminates non-determinism (hence contract can use standard programming languages)
+   - order transactions via a pluggable consensus protocol
+   - validate transactions against an application-specific endorsement policy
+     before committing to ledger.
+
+Privacy / Confidentiality: Fabric enables confidentiality via channel architecture
+   - participants on Fabric network can establish a channel between the subset
+      of participants that should be granted visibility to a particular transaction.
+      AKA network overlay: only nodes that participate in channel have access
+      to smart contract and data transacted.
+   - work being done on private data (SideDB) and zero knowledge proofs.
+
+Pluggable Consensus: transaction order done by an ordering services:
+   - Crash fault-tolerant (CFT) order service implemented w/ Kafka and Zookeeper.
+   - Fabric will deliver RAFT consensus ordering service implemented with
+      etcd-RAFT and a fully decentralized Byzantine fault-tolerant (BFT)
+      ordering service.
+      NOTE: Fabric network can have multiple order services
+
+Performance / Scalability:
+   - Hyperledger Caliper: benchmarking framework for performance.
+
+
+
+
+
+
+
+
+Prerequisites
+http://hyperledger-fabric.readthedocs.io/en/latest/prereqs.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##
